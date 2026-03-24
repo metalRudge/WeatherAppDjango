@@ -1,8 +1,24 @@
 import requests
-from django.shortcuts import render
-from .models import SearchHistory
+from django.shortcuts import render,redirect,get_object_or_404
+from django.utils import timezone
+from .models import SearchHistory,WeatherStation
+from decouple import config
+API_KEY = config('OPENWEATHER_API_KEY')
 
-API_KEY = "4246f9c69acc6507f2cb6cf19f556ec0"
+
+def add_Station(request):
+    if request.method == "POST":
+        name = request.POST.get('name','').strip()
+        location = request.POST.get('location','').strip()
+        if name and location:
+            WeatherStation.objects.create(station_name=name,station_loc=location)
+    return redirect('index')
+
+def delete_station(request,station_id):
+    station = get_object_or_404(WeatherStation,id=station_id)
+    station.delete()
+    return redirect('index')
+
 
 def index(request):
     weather = None
