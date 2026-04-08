@@ -9,9 +9,6 @@ class SearchHistory(models.Model):
 
     def __str__(self):
         return f"{self.city_name} at {self.searched_at.strftime('%Y-%m-%d %H:%M')}"
-<<<<<<< HEAD
-=======
-    
 
 class WeatherStation(models.Model):
     station_name = models.CharField(max_length=100)
@@ -27,6 +24,3 @@ class WeatherStation(models.Model):
         return(
         f"{self.station_name} at {self.desc}"
         f"measured : {self.previous_reading.strftime('%Y-%m-%d %H:%M')}")
-    
-
->>>>>>> master
