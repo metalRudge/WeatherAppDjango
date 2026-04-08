@@ -1,4 +1,5 @@
 import requests
+from .services.station_reader import load_stations_data
 from django.shortcuts import render,redirect,get_object_or_404
 from .models import SearchHistory,WeatherStation
 from decouple import config
@@ -23,7 +24,7 @@ def index(request):
     weather = None
     error = None
     recent_searches = SearchHistory.objects.order_by('-searched_at')[:5]
-
+    stations_data, stations_error = load_stations_data()
 
     if request.method == "POST":
         city = request.POST.get('city', '').strip()
@@ -58,4 +59,5 @@ def index(request):
                 error = "Network error. Please try again"
         else:
             error = "Unexpected error.Please enter a valid city name."
-    return render(request,"main/index.html",{'weather':weather,'error': error,'recent_searches': recent_searches})
+    return render(request,"main/index.html",{'weather':weather,'error': error,'recent_searches': recent_searches,'stations_data':stations_data,'stations_error':stations_error,},)
+
