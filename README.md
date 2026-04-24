@@ -67,7 +67,7 @@ python manage.py migrate
 ## 6. Start the server
 
 ```powershell
-python manage.py runserver
+python manage.py tailwind runserver 
 ```
 
 Visit [http://127.0.0.1:8000](http://127.0.0.1:8000)
