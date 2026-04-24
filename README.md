@@ -58,6 +58,7 @@ Get a free API key at [openweathermap.org](https://openweathermap.org/) → Acco
 ## 5. Run migrations
 
 ```powershell
+python manage.py makemigrations -->
 python manage.py migrate
 ```
 
