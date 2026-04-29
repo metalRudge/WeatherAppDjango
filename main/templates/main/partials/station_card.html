@@ -4,14 +4,17 @@
             <p class="text-xs font-semibold uppercase tracking-[0.18em] text-sky-600">
                 Remote station
             </p>
-
             <h3 class="mt-2 mb-2 text-lg font-semibold text-slate-900">
-                {{ station.station_name }}
+                ID : {{ station.station_id }}
+            </h3>
+            <h3 class="mt-2 mb-2 text-lg font-semibold text-slate-900">
+                Name : {{ station.station_name }}
             </h3>
             <p class="mt-4 text-sm text-emerald-500">
-                {{ station.location }}
+                Location: {{ station.station_loc }}
             </p>
         </div>
+
         <span class="rounded-full px-3 py-1 text-xs font-medium
         {% if stations_error %}
         {% else %}
@@ -28,22 +31,22 @@
 
     <div class="box-border flex flex-col max-w-md items-center gap-x-4 rounded-xl">
         <div class="">
-            <p class="">Temperature {{ station.telemetry.temperature_c|default_if_none:"NaN" }}°C</p>
+            <p class="">Temperature {{ station.temperature_c|default_if_none:"NaN" }}°C</p>
         </div>
         <div class="">
-            <p class="">Humidity {{ station.telemetry.humidity_pct|default_if_none:"NaN" }}%</p>
+            <p class="">Humidity {{ station.humidity_pct|default_if_none:"NaN" }}%</p>
         </div>
         <div class="">
-            <p class="">Pressure {{ station.telemetry.pressure_hpa|default_if_none:"NaN" }} hPa</p>
+            <p class="">Pressure {{ station.pressure_hpa|default_if_none:"NaN" }} hPa</p>
         </div>
         <div class="">
-            <p class="">Perspiration {{ station.telemetry.perspiration|default_if_none:"NaN" }} mm/h </p>
+            <p class="">Perspiration {{ station.perspiration|default_if_none:"NaN" }} mm/h </p>
         </div>
         <div class="">
-            <p class="">Battery {{ station.telemetry.battery_v|default_if_none:"NaN" }} V</p>
+            <p class="">Battery {{ station.battery_v|default_if_none:"NaN" }} V</p>
         </div>
         <div class="">
-            <p class="">Signal {{ station.telemetry.signal_rssi|default_if_none:"NaN" }} dBm</p>
+            <p class="">Signal {{ station.signal_rssi|default_if_none:"NaN" }} dBm</p>
         </div>
     </div>
 </div>

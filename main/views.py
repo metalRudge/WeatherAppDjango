@@ -21,6 +21,7 @@ def index(request):
             loc = request.POST.get('station_loc', '').strip()
             if not id:
                 error = "ID field cannot be empty - ID required."
+                active_tab = 'add_station'
             elif not WeatherStation.objects.filter(station_id=id).exists():
                 WeatherStation.objects.create(station_id=id, station_name=name, station_loc=loc)
                 return redirect('/?' + 'tab=dashboard')

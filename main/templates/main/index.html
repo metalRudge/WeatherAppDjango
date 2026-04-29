@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="{% static 'css/output.css' %}">
     <title>Weather App</title>
 </head>
-<body class="min-h-screen bg-slate-100">
+<body class="">
     {% include "main/partials/navbar.html"%}
 
-    
+    <div id="tab-content">
     {% if active_tab == 'dashboard' %}
         {%include "main/partials/dashboard.html" %}
     {%endif%}
