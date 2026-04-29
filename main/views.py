@@ -19,14 +19,17 @@ def index(request):
             id = request.POST.get('station_id', '').strip()
             name = request.POST.get('station_name', '').strip()
             loc = request.POST.get('station_loc', '').strip()
+            active_tab = 'add_station'
             if not id:
                 error = "ID field cannot be empty - ID required."
-                active_tab = 'add_station'
             elif not WeatherStation.objects.filter(station_id=id).exists():
                 WeatherStation.objects.create(station_id=id, station_name=name, station_loc=loc)
+                active_tab = 'dashboard'
                 return redirect('/?' + 'tab=dashboard')
             else:
                 error = "A station with the same ID already exists."
+                
+
 
         elif action == 'delete_station':
             station_id = request.POST.get('station_id')

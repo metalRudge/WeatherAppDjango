@@ -112,7 +112,8 @@ USE_I18N = True
 
 USE_TZ = True
 
-
+TAILWIND_CLI_SRC_CSS = ".django_tailwind_cli/source.css"
+TAILWIND_CLI_DIST_CSS = "css/output.css"
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 

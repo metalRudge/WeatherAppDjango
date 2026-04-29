@@ -6,6 +6,7 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/output.css' %}">
     <title>Weather App</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body class="">
     {% include "main/partials/navbar.html"%}
@@ -18,5 +19,8 @@
     {%if active_tab == 'add_station'%}
         {%include "main/partials/add_station.html" %}    
     {% endif %}
+     <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>
