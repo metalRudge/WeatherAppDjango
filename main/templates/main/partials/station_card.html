@@ -5,7 +5,7 @@
                 Remote station
             </p>
 
-            <h3 class="mt-1 text-lg font-semibold text-slate-900">
+            <h3 class="">
                 {{ station.station_name }}
             </h3>
             <p class="mt-1 text-sm text-slate-500">
@@ -27,37 +27,49 @@
         </div>
     {% endif %}
 
-    <div class="mt-5 grid grid-cols-2 gap-3">
-        <div class="rounded-xl bg-slate-50 p-3">
-            <p class="text-xs text-slate-500">Temperature</p>
-            <p class="mt-1 text-lg font-semibold text-slate-900">
+    <div class="container mx-auto">
+        <div class="">
+            <p class="">Temperature</p>
+            <p class="">
                 {{ station.telemetry.temperature_c|default_if_none:"NaN" }}°C
             </p>
         </div>
 
-        <div class="rounded-xl bg-slate-50 p-3">
-            <p class="text-xs text-slate-500">Humidity</p>
-            <p class="mt-1 text-lg font-semibold text-slate-900">
+        <div class="">
+            <p class="">Humidity</p>
+            <p class="">
                 {{ station.telemetry.humidity_pct|default_if_none:"NaN" }}%
             </p>
         </div>
 
-        <div class="rounded-xl bg-slate-50 p-3">
-            <p class="text-xs text-slate-500">Pressure</p>
-            <p class="mt-1 text-lg font-semibold text-slate-900">
+        <div class="">
+            <p class="">Pressure</p>
+            <p class="">
                 {{ station.telemetry.pressure_hpa|default_if_none:"NaN" }} hPa
             </p>
         </div>
-        <div class="rounded-xl bg-slate-50 p-3">
-            <p class="text-xs text-slate-500">Perspiration</p>
-            <p class="mt-1 text-lg font-semibold text-slate-900">
+        <div class="">
+            <p class="">Perspiration</p>
+            <p class="">
                 {{ station.telemetry.perspiration|default_if_none:"NaN" }} mm/h 
             </p>
         </div>
-        <div class="rounded-xl bg-slate-50 p-3">
-            <p class="text-xs text-slate-500">Battery</p>
-            <p class="mt-1 text-lg font-semibold text-slate-900">
+        <div class="">
+            <p class="">Battery</p>
+            <p class="">
                 {{ station.telemetry.battery_v|default_if_none:"NaN" }} V
+            </p>
+        </div>
+        <div class="">
+            <p class="">Signal</p>
+            <p class="">
+                {{ station.telemetry.signal_rssi|default_if_none:"NaN" }} dBm
+            </p>
+        </div>
+        <div class="">
+            <p class="">Status</p>
+            <p class="">
+                {{ station.telemetry.status|default_if_none:"Offline" }}
             </p>
         </div>
     </div>

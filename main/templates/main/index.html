@@ -2,17 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
     <title>Weather App</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 2rem; text-align: center; }
-        input[type="text"] { padding: 0.5rem; width: 250px; border-radius: 5px; border: 1px solid #ccc; }
-        button { padding: 0.5rem 1rem; border: none; border-radius: 5px; background: #007BFF; color: white; cursor: pointer; }
-        .weather, .recent { margin-top: 1.5rem; }
-        .error { color: red; margin-top: 1rem; }
-        img { margin-top: 0.5rem; }
-        ul { list-style: none; padding: 0; }
-        li { margin: 0.5rem 0; }
-    </style>
 </head>
 <body>
     <h1>Weather App</h1>
@@ -56,3 +49,9 @@
     {% endif %}
 </body>
 </html>
+
+
+<!-- 
+    
+    
+-->
