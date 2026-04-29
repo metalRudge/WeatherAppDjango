@@ -19,3 +19,4 @@ db.sqlite3
 #tailwind
 staticfiles/
 .django_tailwind_cli/
+assets/css/output.css
