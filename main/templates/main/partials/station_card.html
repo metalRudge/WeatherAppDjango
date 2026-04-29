@@ -5,20 +5,19 @@
                 Remote station
             </p>
 
-            <h3 class="">
+            <h3 class="mt-2 mb-2 text-lg font-semibold text-slate-900">
                 {{ station.station_name }}
             </h3>
-            <p class="mt-1 text-sm text-slate-500">
+            <p class="mt-4 text-sm text-emerald-500">
                 {{ station.location }}
             </p>
         </div>
-
         <span class="rounded-full px-3 py-1 text-xs font-medium
         {% if stations_error %}
         {% else %}
         bg-emerald-50 text-emerald-700
         {% endif %}">
-            {% if station.batch_error %}Batch issue{% else %}Online{% endif %}
+            {% if station.batch_error %}Offline{% else %}Online{% endif %}
         </span>
         </div>
         {% if station.batch_error %}
@@ -27,21 +26,18 @@
         </div>
     {% endif %}
 
-    <div class="container mx-auto">
+    <div class="mx-auto flex flex-col max-w-md items-center gap-x-4 rounded-xl">
         <div class="">
             <p class="">Temperature</p>
-            <p class="">
-                {{ station.telemetry.temperature_c|default_if_none:"NaN" }}°C
+            <p class="">{{ station.telemetry.temperature_c|default_if_none:"NaN" }}°C
             </p>
         </div>
-
         <div class="">
             <p class="">Humidity</p>
             <p class="">
                 {{ station.telemetry.humidity_pct|default_if_none:"NaN" }}%
             </p>
         </div>
-
         <div class="">
             <p class="">Pressure</p>
             <p class="">
@@ -64,12 +60,6 @@
             <p class="">Signal</p>
             <p class="">
                 {{ station.telemetry.signal_rssi|default_if_none:"NaN" }} dBm
-            </p>
-        </div>
-        <div class="">
-            <p class="">Status</p>
-            <p class="">
-                {{ station.telemetry.status|default_if_none:"Offline" }}
             </p>
         </div>
     </div>
