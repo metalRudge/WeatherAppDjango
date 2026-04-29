@@ -3,29 +3,13 @@ from pathlib import Path
 from django.conf import settings
 from dataclasses import dataclass
 from datetime import datetime
-"""
-def normalize_station(station):
-    telemetry = station.get("telemetry", {})
+from ..models import WeatherStation
 
-    return {
-        "station_id": station.get("station_id"),
-        "station_name": station.get("station_name"),
-        "location": station.get("location"),
-        "measured_at": station.get("measured_at"),
-        "temperature_c": telemetry.get("temperature_c"),
-        "humidity_pct": telemetry.get("humidity_pct"),
-        "pressure_hpa": telemetry.get("pressure_hpa"),
-        "perspiration": telemetry.get("perspiration"),
-        "battery_v": telemetry.get("battery_v"),
-        "signal_rssi": telemetry.get("signal_rssi"),
-        "status": telemetry.get("status"),
-        "batch_error": station.get("batch_error"),
-    }
-"""
 @dataclass
 class StationTelemetry:
     station_id: str
     station_name: str
+    station_loc :str
     measured_at: datetime
     temperature_c: float | None
     humidity_pct: float | None
@@ -39,14 +23,25 @@ class StationTelemetry:
 
 
 def load_stations_data():
-    file_path = Path(settings.BASE_DIR) / "main" / "mock_data" / "station1.json"
     try:
-        with open(file_path, "r", encoding="utf-8") as f:
-            data = json.load(f)
-        return data, None
-    except FileNotFoundError:
-        return None,"No station data found."
-    except json.JSONDecodeError:
-        return None,"JSON could not be read, invalid format"
-    except OSError:
-        return None,"JSON file couldn't be openend"
+        stations = WeatherStation.objects().order_by('-previous_reading')
+        stations_data = [
+            StationTelemetry(
+                station_id=station.station_id,
+                station_name=station.station_name,
+                station_loc=station.station_loc,
+                measured_at=station.previous_reading,
+                temperature_c=station.temperature,
+                humidity_pct=station.humidity,
+                pressure_hpa=station.pressure,
+                perspiration=None,  # Placeholder for future data
+                battery_v=None,    # Placeholder for future data
+                signal_rssi=None,  # Placeholder for future data
+                status= "Online",  #if station.is_online else "Offline",Placeholder for future status logic, implement stations.is_online property in the future
+                batch_error=None   # Placeholder for future error handling
+                )
+            for station in stations
+        ]
+        return stations_data, None
+    except Exception as e:
+        return None, f"Error fetching stations from database: {str(e)}"

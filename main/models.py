@@ -11,6 +11,7 @@ class SearchHistory(models.Model):
         return f"{self.city_name} at {self.searched_at.strftime('%Y-%m-%d %H:%M')}"
 
 class WeatherStation(models.Model):
+    station_id = models.CharField(max_length=50, unique=True, null=False, blank=False,default="")
     station_name = models.CharField(max_length=100)
     station_loc = models.CharField(max_length=100) # fetch GPS coord here in the future
     temperature = models.FloatField(null=True,blank=True)

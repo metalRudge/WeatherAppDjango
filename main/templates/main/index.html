@@ -7,21 +7,14 @@
     <link rel="stylesheet" href="{% static 'css/output.css' %}">
     <title>Weather App</title>
 </head>
-<body>
+<body class="min-h-screen bg-slate-100">
     {% include "main/partials/navbar.html"%}
-    {% if error %}
-        <div class="error">{{ error }}</div>
-    {% endif %}
 
+    
     {% if active_tab == 'dashboard' %}
-        {% if stations_error %}
-            <div class="error">{{ stations_error }}</div>
-        {% elif stations_data %}
-            {% for station in stations_data %}
-                {% include "main/partials/station_card.html" with station=station %}
-            {% endfor %}
-        {% endif %}
-    {% endif %}
+        {%include "main/partials/dashboard.html" %}
+    {%endif%}
+
     {%if active_tab == 'add_station'%}
         {%include "main/partials/add_station.html" %}    
     {% endif %}
