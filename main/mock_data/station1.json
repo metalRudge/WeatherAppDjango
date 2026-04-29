@@ -1,17 +1,19 @@
 [
   {
+    "schema_version": "1.0",
     "station_id": "roof-01",
     "station_name": "Roof Station 01",
     "location": "Savski Venac Roof",
     "measured_at": "2026-04-08T17:30:00Z",
     "telemetry": {
       "temperature_c": 21.8,
-      "humidity_pct": null,
+      "humidity_pct": 90,
       "pressure_hpa": 1011,
+      "perspiration": 5,
       "battery_v": 3.87,
       "signal_rssi": -88,
       "status": "online"
     },
-    "batch_error": "Humidity value missing from latest station batch."
+    "batch_error": null
   }
 ]

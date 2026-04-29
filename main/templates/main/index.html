@@ -25,7 +25,14 @@
     {% if error %}
         <div class="error">{{ error }}</div>
     {% endif %}
-    {% include "main/partials/station_card.html" with station=station %}
+    {% if stations_error %}
+        <div class="error">{{ stations_error }}</div>
+    {% elif stations_data %}
+        {% for station in stations_data %}
+            {% include "main/partials/station_card.html" with station=station %}
+        {% endfor %}
+    {% endif %}
+    
     {% if weather %}
         <div class="weather">
             <h2>{{ weather.city }}</h2>

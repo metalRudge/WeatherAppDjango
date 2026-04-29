@@ -31,28 +31,33 @@
         <div class="rounded-xl bg-slate-50 p-3">
             <p class="text-xs text-slate-500">Temperature</p>
             <p class="mt-1 text-lg font-semibold text-slate-900">
-                {{ station.temperature_c|default_if_none:"NaN" }}°C
+                {{ station.telemetry.temperature_c|default_if_none:"NaN" }}°C
             </p>
         </div>
 
         <div class="rounded-xl bg-slate-50 p-3">
             <p class="text-xs text-slate-500">Humidity</p>
             <p class="mt-1 text-lg font-semibold text-slate-900">
-                {{ station.humidity_pct|default_if_none:"NaN" }}%
+                {{ station.telemetry.humidity_pct|default_if_none:"NaN" }}%
             </p>
         </div>
 
         <div class="rounded-xl bg-slate-50 p-3">
             <p class="text-xs text-slate-500">Pressure</p>
             <p class="mt-1 text-lg font-semibold text-slate-900">
-                {{ station.pressure_hpa|default_if_none:"NaN" }} hPa
+                {{ station.telemetry.pressure_hpa|default_if_none:"NaN" }} hPa
             </p>
         </div>
-
+        <div class="rounded-xl bg-slate-50 p-3">
+            <p class="text-xs text-slate-500">Perspiration</p>
+            <p class="mt-1 text-lg font-semibold text-slate-900">
+                {{ station.telemetry.perspiration|default_if_none:"NaN" }} mm/h 
+            </p>
+        </div>
         <div class="rounded-xl bg-slate-50 p-3">
             <p class="text-xs text-slate-500">Battery</p>
             <p class="mt-1 text-lg font-semibold text-slate-900">
-                {{ station.battery_v|default_if_none:"NaN" }} V
+                {{ station.telemetry.battery_v|default_if_none:"NaN" }} V
             </p>
         </div>
     </div>

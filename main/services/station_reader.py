@@ -1,8 +1,8 @@
 import json
 from pathlib import Path
 from django.conf import settings
-
-
+from dataclasses import dataclass
+from datetime import datetime
 """
 def normalize_station(station):
     telemetry = station.get("telemetry", {})
@@ -15,12 +15,28 @@ def normalize_station(station):
         "temperature_c": telemetry.get("temperature_c"),
         "humidity_pct": telemetry.get("humidity_pct"),
         "pressure_hpa": telemetry.get("pressure_hpa"),
+        "perspiration": telemetry.get("perspiration"),
         "battery_v": telemetry.get("battery_v"),
         "signal_rssi": telemetry.get("signal_rssi"),
         "status": telemetry.get("status"),
         "batch_error": station.get("batch_error"),
     }
 """
+@dataclass
+class StationTelemetry:
+    station_id: str
+    station_name: str
+    measured_at: datetime
+    temperature_c: float | None
+    humidity_pct: float | None
+    pressure_hpa: float | None
+    perspiration: float | None
+    battery_v: float | None
+    signal_rssi: int | None
+    status: str
+    batch_error: str | None
+
+
 
 def load_stations_data():
     file_path = Path(settings.BASE_DIR) / "main" / "mock_data" / "station1.json"
