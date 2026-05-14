@@ -1,101 +1,117 @@
-<div class="group overflow-hidden rounded-[28px] border border-slate-200/80 bg-white shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-lg">
-    <div class="bg-gradient-to-br from-sky-500 via-cyan-500 to-teal-500 p-6 text-white">
-        <div class="flex items-start justify-between gap-4">
+<div class="overflow-hidden rounded-2xl bg-linear-to-b from-[#1a2744] to-[#0f1c38] shadow-[0_8px_32px_oklch(0_0_0/0.4)]">
+
+    <div class="relative px-5 pt-6 pb-4">
+
+        <div class="flex items-start justify-between gap-3">
             <div>
-                <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/80">
+                <p class="text-[10px] font-semibold uppercase tracking-[0.22em] text-white/40">
                     Remote station
                 </p>
-                <h3 class="mt-3 text-xl font-semibold leading-tight">
+                <h3 class="mt-1 text-base font-semibold text-white">
                     {{ station.station_name|default:"Unnamed station" }}
                 </h3>
-                <p class="mt-2 text-sm text-white/80">
-                    ID {{ station.station_id }}
+                <p class="mt-0.5 text-xs text-white/40">
+                    {{ station.station_loc|default:"Location not set" }}
                 </p>
             </div>
 
-            <span class="inline-flex rounded-full px-3 py-1 text-xs font-semibold bg-white/20 text-white">
+            <span class="inline-flex shrink-0 items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold backdrop-blur-sm
+                {% if station.batch_error %}
+                    bg-red-500/20 text-red-300
+                {% else %}
+                    bg-emerald-500/20 text-emerald-300
+                {% endif %}">
+                <span class="h-1.5 w-1.5 rounded-full
+                    {% if station.batch_error %}bg-red-400{% else %}bg-emerald-400 shadow-[0_0_6px_#4ade80]{% endif %}">
+                </span>
                 {% if station.batch_error %}Offline{% else %}Online{% endif %}
             </span>
         </div>
 
-        <div class="mt-6 flex items-end justify-between gap-4">
-            <div>
-                <p class="text-sm text-white/80">Current temperature</p>
-                <p class="mt-1 text-4xl font-semibold tracking-tight">
-                    {{ station.temperature_c|default_if_none:"NaN" }}°C
-                </p>
-            </div>
-
-            <div class="rounded-2xl bg-white/15 px-4 py-3 backdrop-blur-sm">
-                <p class="text-[11px] uppercase tracking-[0.18em] text-white/70">Location</p>
-                <p class="mt-1 text-sm font-medium text-white">
-                    {{ station.station_loc|default:"Not set" }}
-                </p>
-            </div>
+        <div class="mt-5 flex items-end justify-between gap-2">
+            <p class="font-mono text-6xl font-thin leading-none tracking-tight text-white">
+                {{ station.temperature_c|default_if_none:"—" }}<span class="text-3xl font-extralight text-white/60">°C</span>
+            </p>
+            <p class="mb-1 text-xs text-white/50">ID {{ station.station_id }}</p>
         </div>
+
     </div>
 
     {% if station.batch_error %}
-        <div class="border-b border-amber-200 bg-amber-50 px-6 py-3 text-sm text-amber-800">
+        <div class="mx-4 mb-2 rounded-xl bg-amber-500/10 px-4 py-2.5 text-xs text-amber-300 border border-amber-500/20">
             {{ station.batch_error }}
         </div>
     {% endif %}
 
-    <div class="grid grid-cols-2 gap-3 p-5 sm:grid-cols-3">
-        <div class="rounded-2xl bg-slate-50 p-4">
-            <div class="flex items-center gap-2 text-slate-400">
-                <i data-lucide="droplets" class="h-4 w-4"></i>
-                <p class="text-[11px] font-semibold uppercase tracking-[0.16em]">Humidity</p>
+    <div class="grid grid-cols-3 gap-px bg-white/5 border-t border-white/8">
+
+        <div class="flex flex-col gap-1 bg-white/[0.04] px-4 py-4 backdrop-blur-sm">
+            <div class="flex items-center gap-1.5 text-white/40">
+                <i data-lucide="droplets" class="h-3.5 w-3.5"></i>
+                <p class="text-[10px] uppercase tracking-widest">Humidity</p>
             </div>
-            <p class="mt-3 text-lg font-semibold text-slate-900">{{ station.humidity_pct|default_if_none:"NaN" }}%</p>
+            <p class="font-mono text-lg font-semibold text-white">
+                {{ station.humidity_pct|default_if_none:"—" }}<span class="text-xs font-normal text-white/40">%</span>
+            </p>
         </div>
 
-        <div class="rounded-2xl bg-slate-50 p-4">
-            <div class="flex items-center gap-2 text-slate-400">
-                <i data-lucide="gauge" class="h-4 w-4"></i>
-                <p class="text-[11px] font-semibold uppercase tracking-[0.16em]">Pressure</p>
+        <div class="flex flex-col gap-1 bg-white/[0.04] px-4 py-4 backdrop-blur-sm">
+            <div class="flex items-center gap-1.5 text-white/40">
+                <i data-lucide="gauge" class="h-3.5 w-3.5"></i>
+                <p class="text-[10px] uppercase tracking-widest">Pressure</p>
             </div>
-            <p class="mt-3 text-lg font-semibold text-slate-900">{{ station.pressure_hpa|default_if_none:"NaN" }} hPa</p>
+            <p class="font-mono text-lg font-semibold text-white">
+                {{ station.pressure_hpa|default_if_none:"—" }}<span class="text-xs font-normal text-white/40"> hPa</span>
+            </p>
         </div>
 
-        <div class="rounded-2xl bg-slate-50 p-4">
-            <div class="flex items-center gap-2 text-slate-400">
-                <i data-lucide="cloud-rain" class="h-4 w-4"></i>
-                <p class="text-[11px] font-semibold uppercase tracking-[0.16em]">Perspiration</p>
+        <div class="flex flex-col gap-1 bg-white/[0.04] px-4 py-4 backdrop-blur-sm">
+            <div class="flex items-center gap-1.5 text-white/40">
+                <i data-lucide="cloud-rain" class="h-3.5 w-3.5"></i>
+                <p class="text-[10px] uppercase tracking-widest">Rain</p>
             </div>
-            <p class="mt-3 text-lg font-semibold text-slate-900">{{ station.perspiration|default_if_none:"NaN" }} mm/h</p>
+            <p class="font-mono text-lg font-semibold text-white">
+                {{ station.perspiration|default_if_none:"—" }}<span class="text-xs font-normal text-white/40"> mm/h</span>
+            </p>
         </div>
 
-        <div class="rounded-2xl bg-slate-50 p-4">
-            <div class="flex items-center gap-2 text-slate-400">
-                <i data-lucide="battery-charging" class="h-4 w-4"></i>
-                <p class="text-[11px] font-semibold uppercase tracking-[0.16em]">Battery</p>
+        <div class="flex flex-col gap-1 bg-white/[0.04] px-4 py-4 backdrop-blur-sm">
+            <div class="flex items-center gap-1.5 text-white/40">
+                <i data-lucide="battery-charging" class="h-3.5 w-3.5"></i>
+                <p class="text-[10px] uppercase tracking-widest">Battery</p>
             </div>
-            <p class="mt-3 text-lg font-semibold text-slate-900">{{ station.battery_v|default_if_none:"NaN" }} V</p>
+            <p class="font-mono text-lg font-semibold text-white">
+                {{ station.battery_v|default_if_none:"—" }}<span class="text-xs font-normal text-white/40"> V</span>
+            </p>
         </div>
 
-        <div class="rounded-2xl bg-slate-50 p-4">
-            <div class="flex items-center gap-2 text-slate-400">
-                <i data-lucide="radio" class="h-4 w-4"></i>
-                <p class="text-[11px] font-semibold uppercase tracking-[0.16em]">Signal</p>
+        <div class="flex flex-col gap-1 bg-white/4 px-4 py-4 backdrop-blur-sm">
+            <div class="flex items-center gap-1.5 text-white/40">
+                <i data-lucide="radio" class="h-3.5 w-3.5"></i>
+                <p class="text-[10px] uppercase tracking-widest">Signal</p>
             </div>
-            <p class="mt-3 text-lg font-semibold text-slate-900">{{ station.signal_rssi|default_if_none:"NaN" }} dBm</p>
+            <p class="font-mono text-lg font-semibold text-white">
+                {{ station.signal_rssi|default_if_none:"—" }}<span class="text-xs font-normal text-white/40"> dBm</span>
+            </p>
         </div>
 
-        <div class="rounded-2xl bg-slate-50 p-4">
-    <div class="flex items-center gap-2 text-slate-400">
-        <i data-lucide="activity" class="h-4 w-4"></i>
-        <p class="text-[11px] font-semibold uppercase tracking-[0.16em]">Status</p>
-    </div>
-    <div class="mt-3">
-        <span class="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold
-            {% if station.batch_error %}bg-red-100 text-red-700{% else %}bg-emerald-100 text-emerald-700{% endif %}">
-            <span class="h-2.5 w-2.5 rounded-full
-                {% if station.batch_error %}bg-red-400{% else %}bg-emerald-400{% endif %}">
+        <div class="flex flex-col gap-1 bg-white/4 px-4 py-4 backdrop-blur-sm">
+            <div class="flex items-center gap-1.5 text-white/40">
+                <i data-lucide="activity" class="h-3.5 w-3.5"></i>
+                <p class="text-[10px] uppercase tracking-widest">Status</p>
+            </div>
+            <span class="inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold
+                {% if station.batch_error %}
+                    bg-red-500/20 text-red-300
+                {% else %}
+                    bg-emerald-500/20 text-emerald-300
+                {% endif %}">
+                <span class="h-1.5 w-1.5 rounded-full
+                    {% if station.batch_error %}bg-red-400{% else %}bg-emerald-400{% endif %}">
+                </span>
+                {% if station.batch_error %}Offline{% else %}Online{% endif %}
             </span>
-            {% if station.batch_error %}Offline{% else %}Online{% endif %}
-        </span>
+        </div>
+
     </div>
 </div>
-</div>
-

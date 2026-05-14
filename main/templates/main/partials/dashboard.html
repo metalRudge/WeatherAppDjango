@@ -1,32 +1,84 @@
 <section class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+
     {% if error %}
-        <div class="mb-6 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700">
+        <div class="mb-6 rounded-lg border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-400">
             {{ error }}
         </div>
     {% endif %}
 
     {% if stations_error %}
-        <div class="mb-6 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+        <div class="mb-6 rounded-lg border border-amber-500/20 bg-amber-500/10 px-4 py-3 text-sm text-amber-400">
             {{ stations_error }}
         </div>
-    {% elif stations_data %}
-        <div class="grid gap-6 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
+    {% endif %}
+
+    {% if stations_data %}
+
+        {# ── Overview card ────────────────────────────────── #}
+        <div class="mb-6 rounded-xl border border-[#30363d] bg-[#161b22] px-6 py-5">
+            <p class="mb-4 text-[10px] font-semibold uppercase tracking-[0.15em] text-[#484f58]">
+                Network Overview
+            </p>
+            <div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
+
+                <div>
+                    <p class="text-xs text-[#8b949e]">Avg Temperature</p>
+                    <p class="mt-1 font-mono text-xl font-bold text-[#e6edf3]">
+                        
+                        <span class="text-sm font-normal text-[#484f58]">°C</span>
+                    </p>
+                </div>
+
+                <div>
+                    <p class="text-xs text-[#8b949e]">Avg Humidity</p>
+                    <p class="mt-1 font-mono text-xl font-bold text-[#e6edf3]">
+                        
+                        <span class="text-sm font-normal text-[#484f58]">%</span>
+                    </p>
+                </div>
+
+                <div>
+                    <p class="text-xs text-[#8b949e]">Avg Pressure</p>
+                    <p class="mt-1 font-mono text-xl font-bold text-[#e6edf3]">
+                        
+                        <span class="text-sm font-normal text-[#484f58]">hPa</span>
+                    </p>
+                </div>
+
+                <div>
+                    <p class="text-xs text-[#8b949e]">Active Stations</p>
+                    <p class="mt-1 font-mono text-xl font-bold text-[#e6edf3]">
+                       
+                        <span class="text-sm font-normal text-[#484f58]">online</span>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+        {# ── Station cards grid ───────────────────────────── #}
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
             {% for station in stations_data %}
                 {% include "main/partials/station_card.html" with station=station %}
             {% endfor %}
         </div>
+
     {% else %}
-    <h2 class="mt-3 text-xl font-semibold text-slate-900">
+        <div class="mx-auto mt-16 max-w-sm rounded-xl border border-[#30363d] bg-[#161b22] p-8 text-center">
+            <h2 class="text-base font-semibold text-[#e6edf3]">
                 No stations currently added
             </h2>
-            <p class="mt-3 text-sm text-slate-500">
+            <p class="mt-2 text-sm text-[#8b949e]">
                 Add your first station to start viewing telemetry cards on the dashboard.
             </p>
             <a
                 href="/?tab=add_station"
                 aria-label="Add station"
-                class="mx-auto mt-6 inline-flex h-12 w-12 items-center justify-center rounded-full bg-sky-600 text-2xl font-semibold text-white shadow-sm transition hover:bg-sky-700"
-            >+</a>
+                class="mx-auto mt-6 inline-flex h-11 w-11 items-center justify-center rounded-full bg-teal-700 text-xl font-semibold text-white transition-colors hover:bg-teal-500 active:bg-teal-800"
+            >
+                +
+            </a>
         </div>
     {% endif %}
+
 </section>
